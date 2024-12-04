@@ -4,9 +4,6 @@ const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-    <div class="gif">
-        <img width="300" height="259" alt="RaccoonNotesGif" src="/blog.webp" />
-    </div>
     <h2 style="text-decoration:none;">{frontmatter.title}</h2>
     <ul class="badge__list">
         <li>
@@ -16,5 +13,8 @@ const { frontmatter } = Astro.props;
             <span class="badge badge--item">PUBLISHED</span>{frontmatter.date}
         </li>
     </ul>
+    <div class="page-image">
+        <img width="400" alt="blog-img" src={frontmatter.image.url}/>
+    </div>
     <slot />
 </BaseLayout>
