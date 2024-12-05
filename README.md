@@ -1,6 +1,6 @@
 # RandomRamblings
 
-This is the repo for the RandomRamblings blog. Its just a personal space for me to let out my ideas and thoughts. Freeing up some space in my brain.
+This is the repo for the [RandomRamblings blog](https://www.random-ramblings.me/). Its just a personal space for me to let out my ideas and thoughts. Freeing up some space in my brain.
 
 [![Built with Astro](https://astro.badg.es/v2/built-with-astro/tiny.svg)](https://astro.build) 
 
@@ -11,8 +11,6 @@ This project is based on the astro template [🌌 Milky-Way](https://github.com/
 
 Check their stuff out!
 
-
-## TODO:
 
 
 ## 📃 License
