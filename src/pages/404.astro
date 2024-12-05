@@ -3,12 +3,11 @@ const description = "404";
 import '../styles/global.css';
 
 return Astro.redirect('/');
-
 ---
 <layout>
     <div class="lost">
-        <div class="gif">
-            <img width="300" height="259" alt="Raccoon404Gif" src="/404.webp"/>
+        <div class="page-image">
+            <img width="500" alt="logo" src="/main.png"/>
         </div>
         <h1 class="lost__header">{ description }</h1>
         <p class="lost__body">What do you see?</p>

@@ -303,6 +303,34 @@ footer {
     padding: 0;
 }
 
+blockquote {
+    background-color: var(--dark-accent);
+    padding: 4px;
+    border-radius: 4px;
+    font-style: italic;
+    border-left: 1px solid var(--primary);
+}
+
+.light blockquote {
+    background-color: var(--light);
+    border-left: 1px solid var(--primary);
+}
+
+blockquote::before {
+    content: open-quote; 
+    font-size: 2.2em; 
+    line-height: 0.1em; 
+    vertical-align: -0.4em;
+}
+
+blockquote::after {
+    content: close-quote; 
+    font-size: 2.2em; 
+    line-height: 0.1em; 
+    vertical-align: -0.4em; 
+    margin-left: 95%;
+}
+
 .icon__btn {
     display: inline-block;
     padding: 0 0.5rem;

@@ -14,10 +14,6 @@ Check their stuff out!
 
 ## TODO:
 
-* [ ] Footnotes
-* [ ] Sidenotes
-* [ ] Header/Section links
-* [ ] 
 
 ## 📃 License
 For some reason, this project is licensed under the MIT License. 
