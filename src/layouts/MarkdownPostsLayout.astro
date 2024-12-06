@@ -4,17 +4,20 @@ const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-    <h2 style="text-decoration:none;">{frontmatter.title}</h2>
-    <ul class="badge__list">
-        <li>
-            <span class="badge badge--item">PUBLISHED</span>{frontmatter.date}
-        </li>
-        <li>
-            <span class="badge badge--item">POST #{frontmatter.day}</span>
-        </li>
-    </ul>
-    <div class="page-image">
-        <img width="400" alt="blog-img" src={frontmatter.image.url}/>
-    </div>
-    <slot />
+  <h2 style="text-decoration:none;">{frontmatter.title}</h2>
+  <ul class="badge__list">
+    <li>
+      <span class="badge badge--item">PUBLISHED</span>{frontmatter.date}
+    </li>
+    <li>
+      <span class="badge badge--item">POST #{frontmatter.post}</span>
+    </li>
+    <li>
+      {frontmatter.tags.map((tag) => <span class="badge badge--item tag">#{tag}</span>)}
+    </li>
+  </ul>
+  <div class="page-image">
+    <img width="400" alt={frontmatter.image.alt} src={frontmatter.image.url} />
+  </div>
+  <slot />
 </BaseLayout>

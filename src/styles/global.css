@@ -12,6 +12,7 @@
 :root {
     --primary: #7f3737;
     --primary-light: #ca6a6a;
+    --primary-dark: #664949;
     --dark: #161616;
     --dark-accent: #323232;
     /* --dark-lighter: #3b3b3b; */
@@ -32,18 +33,34 @@
     scrollbar-gutter: stable;
 }
 
-a {
+h2>a {
     text-decoration: none;
-    /* Removes the underline */
     color: inherit;
-    /* Inherits the text color from the parent element */
+}
+
+h2>a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+h2>a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+a {
+    color: var(--primary-light);
+    text-decoration: none;
+}
+
+a:visited {
+    color: var(--primary-dark); 
+    text-decoration: none;
 }
 
 a:hover {
-    text-decoration: none;
-    /* Ensures no underline on hover */
-    color: inherit;
-    /* Prevents color change on hover */
+    text-decoration: underline;
 }
 
 html {
@@ -73,7 +90,7 @@ h2 {
     text-decoration: underline var(--primary);
     text-decoration-thickness: 4px;
     text-underline-offset: 6px;
-    font-size: 2.1rem;
+    font-size: 2rem;
     margin-bottom: 0;
     font-weight: 500;
 }
@@ -100,7 +117,7 @@ h2 {
 p {
     font-family: var(--font);
     font-size: 1.1rem;
-    hyphens: auto;
+    hyphens: none; 
     line-height: 1.5;
     text-indent: 1rem;
 }
@@ -163,13 +180,17 @@ li {
 
 /* Badge */
 .badge {
-    background-color: #664949;
+    background-color: var(--primary-dark);
     color: var(--light);
     border-radius: 6px;
     font-family: var(--font);
     font-weight: 600;
     font-size: .85rem;
     padding: 0.3em 0.6em 0.2em;
+}
+
+.tag {
+    background-color: var(--dark-accent);
 }
 
 .badge__list {
@@ -297,6 +318,15 @@ footer {
     text-decoration: none;
 }
 
+.footer__link:visited {
+    color: var(--primary-light);
+    text-decoration: none;
+}
+
+li {
+    padding-top: 2px;
+}
+
 .footer {
     cursor: default;
     list-style: none;
@@ -305,10 +335,17 @@ footer {
 
 blockquote {
     background-color: var(--dark-accent);
-    padding: 4px;
+    padding: 4px 10px;
     border-radius: 4px;
     font-style: italic;
     border-left: 1px solid var(--primary);
+}
+
+blockquote>p {
+    text-indent: initial;
+    word-break: normal; 
+    overflow-wrap: normal; 
+    hyphens: none; 
 }
 
 .light blockquote {
@@ -387,7 +424,7 @@ blockquote::after {
 }
 
 .lost__body {
-    color: #5C5B77;
+    color: var(--dark-accent);
 }
 
 .lost__link {

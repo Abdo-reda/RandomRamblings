@@ -2,7 +2,8 @@
 title: 'Open Arms'
 author: NoPoint
 date: '2024-12-04'
-day: 1
+tags: ['personal', 'life']
+post: 1
 image:
     url: '/posts/post1.png'
     alt: 'Lotus Fruit'
