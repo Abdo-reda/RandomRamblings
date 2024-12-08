@@ -2,13 +2,15 @@
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/CardPost.astro";
+import { Image } from 'astro:assets';
+import blog from '../assets/blog.png'; 
 const allPosts = await getCollection("posts");
 const pageTitle = "Posts";
 ---
 
 <Layout pageTitle={pageTitle}>
     <div class="page-image">
-        <img width="500" alt="blog-logo" src="/blog.png"/>
+        <Image src={blog} alt="blog logo." width={500} />
     </div>
     <h2>Blog</h2>
     <ul role="list" class="link-card-grid">

@@ -1,9 +1,7 @@
 import { defineConfig } from 'astro/config';
-
 import icon from 'astro-icon';
 
-// https://astro.build/config
 export default defineConfig({
-  trailingSlash: 'never', 
-  integrations: [icon()]
+  trailingSlash: 'never',
+  integrations: [icon()],
 });

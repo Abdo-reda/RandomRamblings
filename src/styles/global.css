@@ -1,13 +1,14 @@
 /* Global styles */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
-.montserrat-regular {
-    font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/fonts/Montserrat.ttf') format('truetype');
+    font-weight: 100 900;
     font-style: normal;
+    font-display: swap;
 }
+
+/* Maybe I need to italic later */
 
 :root {
     --primary: #7f3737;
@@ -26,12 +27,170 @@
     text-align: center;
 }
 
+.input {
+    max-width: 60%;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 8px 0px;
+}
+
+.button-wrapper {
+    margin: 8px 0px;
+}
+
+.radio-group {
+    margin: 8px 0px;
+    display: flex;
+    gap: 10px;
+}
+
+.radio-group label {
+    font-weight: normal;
+}
+
+.radio {
+    appearance: none;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    border: 2px solid var(--dark-accent);
+    transition: 0.15s all linear;
+    margin-right: 4px;
+    position: relative;
+    top: 4px;
+}
+
+.radio:focus {
+    outline: 1px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.radio:checked {
+    background-color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+fieldset legend {
+    font-family: var(--font);
+    text-decoration: underline var(--primary);
+    text-decoration-thickness: 4px;
+    text-underline-offset: 6px;
+    font-size: 2rem;
+    margin: 0px 8px;
+    padding: 0px 8px;
+    font-weight: 500;
+}
+
+fieldset {
+    border: 2px solid var(--dark-accent);
+    border-radius: 4px;
+    padding: 8px;
+    margin: 16px 0px;
+}
+
+label {
+    font-family: var(--font);
+    color: var(--light);
+    font-weight: bold;
+}
+
+.light label {
+    color: var(--dark);
+}
+
+button {
+    background-color: var(--primary);
+    color: var(--light);
+    font-family: var(--font);
+    font-size: larger;
+    font-weight: medium;
+    border-radius: 4px;
+    padding: 8px;
+    border: none;
+    width: 100%;
+}
+
+.page-wrapper {
+    padding: 20px 40px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.simple-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+button:hover {
+    background-color: var(--primary-light);
+    cursor: pointer;
+}
+
+button:focus-within {
+    outline: none;
+}
+
+.tag-button {
+    transition: background-color 0.25s, color 0.25s;
+}
+
+.tag-button:hover {
+    cursor: pointer;
+    background-color: var(--primary);
+}
+
+.btn:focus-within {
+    color: var(--dark);
+    background-color: var(--primary);
+}
+
+.light .btn:focus-within {
+    color: var(--light);
+}
+
+a:focus {
+    outline: none;
+    border-bottom: 2px solid var(--primary);
+}
+
+input {
+    background-color: transparent;
+    border: 2px solid var(--dark-accent);
+    padding: 8px;
+    color: var(--light);
+    font-family: var(--font);
+    font-size: medium;
+    border-radius: 4px;
+}
+
+input:focus {
+    outline: none;
+    border: 2px solid var(--primary);
+
+}
 
 * {
     scrollbar-color: var(--primary) transparent;
     scrollbar-width: thin;
     scrollbar-gutter: stable;
 }
+
+::selection {
+    background-color: var(--primary-dark);
+    color: var(--light);
+}
+
+.light ::selection {
+    background-color: var(--primary-light);
+    color: var(--light);
+}
+
 
 h2>a {
     text-decoration: none;
@@ -55,12 +214,13 @@ a {
 }
 
 a:visited {
-    color: var(--primary-dark); 
+    color: var(--primary-dark);
     text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    border-bottom: 2px solid var(--primary);
 }
 
 html {
@@ -75,7 +235,11 @@ body {
 }
 
 h1,
-h2, h3, h4, h5, h6 {
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font);
 }
 
@@ -102,9 +266,9 @@ h2 {
 
 .sidenote {
     position: absolute;
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    margin-left: 400px; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-left: 400px;
     border-radius: 6px;
     border: 1px solid var(--primary);
     text-align: left;
@@ -117,7 +281,7 @@ h2 {
 p {
     font-family: var(--font);
     font-size: 1.1rem;
-    hyphens: none; 
+    hyphens: none;
     line-height: 1.5;
     text-indent: 1rem;
 }
@@ -164,12 +328,12 @@ li {
     border-bottom: 2px solid var(--primary);
 }
 
-.navbar__title>a:hover,
 .navbar__menu>a:hover,
 .navbar__menu>a:focus {
     text-decoration: underline var(--primary);
     text-decoration-thickness: 2px;
     text-underline-offset: 6px;
+    border-bottom: none;
 }
 
 /* Gifs */
@@ -191,6 +355,12 @@ li {
 
 .tag {
     background-color: var(--dark-accent);
+}
+
+.tags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 2px;
 }
 
 .badge__list {
@@ -235,12 +405,20 @@ li {
     color: var(--light);
 }
 
+.card__link:focus {
+    border: none;
+}
+
 .card__img {
     border-radius: 16px;
     border: 2px solid var(--dark-accent);
 }
 
-.card__img:hover {
+.card__link:focus .card__img {
+    border: 2px solid var(--primary);
+}
+
+.card__link:hover .card__img {
     border: 2px solid var(--primary);
 }
 
@@ -262,6 +440,7 @@ li {
 
 .card__link:hover {
     transform: scale(1.05);
+    border: none;
 }
 
 .link-card-grid {
@@ -276,11 +455,11 @@ li {
     text-align: center;
     background: rgba(0, 0, 0, 0);
     border: 2px solid var(--primary);
-    border-radius: 8px;
+    border-radius: 4px;
     color: var(--light);
     font: 600 16px var(--font);
     padding: 8px 16px;
-    transition: background-color 0.4s, color 0.4s;
+    transition: background-color 0.25s, color 0.25s;
 }
 
 .btn:hover {
@@ -343,9 +522,9 @@ blockquote {
 
 blockquote>p {
     text-indent: initial;
-    word-break: normal; 
-    overflow-wrap: normal; 
-    hyphens: none; 
+    word-break: normal;
+    overflow-wrap: normal;
+    hyphens: none;
 }
 
 .light blockquote {
@@ -354,23 +533,27 @@ blockquote>p {
 }
 
 blockquote::before {
-    content: open-quote; 
-    font-size: 2.2em; 
-    line-height: 0.1em; 
+    content: open-quote;
+    font-size: 2.2em;
+    line-height: 0.1em;
     vertical-align: -0.4em;
 }
 
 blockquote::after {
-    content: close-quote; 
-    font-size: 2.2em; 
-    line-height: 0.1em; 
-    vertical-align: -0.4em; 
+    content: close-quote;
+    font-size: 2.2em;
+    line-height: 0.1em;
+    vertical-align: -0.4em;
     margin-left: 95%;
 }
 
 .icon__btn {
     display: inline-block;
     padding: 0 0.5rem;
+}
+
+.icon__btn>a:hover {
+    border: 2px solid var(--light);
 }
 
 .icon__link {
@@ -391,6 +574,14 @@ blockquote::after {
 
 .icon__link:hover .icon__svg {
     color: var(--dark);
+}
+
+.icon__link:focus {
+    border: 2px solid var(--primary);
+}
+
+.light .icon__link:focus {
+    border: 2px solid var(--primary);
 }
 
 .icon__svg {

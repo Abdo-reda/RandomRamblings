@@ -1,0 +1,114 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Tag } from "../lib/enums/tagEnum";
+import { Image } from "astro:assets";
+const pageTitle = "Newsletter";
+import { supabaseService } from "../lib/clients/supabase";
+import type { NotificationFrequency } from "../lib/enums/notificationFrequencyEnum";
+
+export const prerender = false;
+
+const errors = { email: "", notification: "" };
+if (Astro.request.method === "POST") {
+  console.log('==== here', Astro.request)
+  try {
+    const data = await Astro.request.formData();
+    console.log('==== blah', data)
+    const email = data.get("email");
+    const notification = data.get("notification");
+
+    if (typeof email !== "string") {
+      errors.email = "Email is not valid. ";
+    } else if (
+      await supabaseService.isNewsletterEmailAlreadySubscribed(email)
+    ) {
+      errors.email = "Email is already registered. ";
+    }
+
+    if (typeof notification !== "string") {
+      errors.notification = "Notification is not valid. ";
+    }
+    // if (typeof password !== "string" || password.length < 6) {
+    //   errors.password += "Password must be at least 6 characters. ";
+    // }
+    // const hasErrors = Object.values(errors).some(msg => msg)
+    // if (!hasErrors) {
+    // }
+
+    console.log("---- what", {
+      email: email as string,
+      notification: notification as NotificationFrequency,
+    });
+
+    // await supabaseService.invokeConfirmNewsletter({
+    //   email: email as string,
+    //   notification: notification as NotificationFrequency,
+    // });
+    // return Astro.redirect("/login"); //TODO: confirmation email sent page
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
+---
+
+<Layout pageTitle={pageTitle}>
+  <div class="page-image">
+    <!-- <Image src={logo} alt="logo." width={500} /> -->
+  </div>
+  <h1>Newsletter</h1>
+  <fieldset>
+    <legend>Subscription</legend>
+    <div class="page-wrapper">
+      <form class="simple-form" method="POST">
+        <div class="input-wrapper">
+          <label for="email">Email</label>
+          <input class="input" type="email" required />
+        </div>
+        <div>
+          <label for="notification">Notification</label>
+          <div class="radio-group">
+            <div>
+              <input
+                class="radio"
+                type="radio"
+                id="weekly"
+                name="notification"
+                value="weekly"
+                checked
+              />
+              <label for="weekly">Weekly</label>
+            </div>
+
+            <div>
+              <input
+                class="radio"
+                type="radio"
+                id="monthly"
+                name="notification"
+                value="monthly"
+              />
+              <label for="monthly">Monthly</label>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="input-wrapper">
+          <label for="tags">Tags</label>
+          <div class="tags-wrapper">
+            {
+              Object.values(TagEnum).map((tag) => (
+                <span class="badge badge--item tag tag-button">
+                  #{tag}
+                </span>
+              ))
+            }
+          </div>
+        </div> -->
+        <div class="button-wrapper">
+          <button type="submit" class="btn"> Subscribe </button>
+        </div>
+      </form>
+    </div>
+  </fieldset>
+</Layout>
