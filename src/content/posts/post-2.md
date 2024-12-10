@@ -1,12 +1,12 @@
 ---
+post: 2
+draft: false
 title: 'Tech Boundaries'
 author: NoPoint
-date: '2024-12-05'
+date: 2024-12-05
 tags: ['game-design', 'technology']
-post: 2
 image:
-    url: '/posts/post2.png'
-    alt: 'Tool'
+    alt: 'Boundaries'
 ---
 
 So today was one of those days where time passes. I haven't really gotten a chance to delve deeply into a topic today, and that will probably be the norm. So, as a result, unfortunately some of the articles I will write will explore a topic on a surface level. While I don't like this, I hope that these articles will act merely **as an entryway or a guidebook** to a much larger topic. In which you - the reader - can explore however you want. In fact, I think this is sometimes better than explaining something too specific in a very detailed way. With time, I will find the right balance.

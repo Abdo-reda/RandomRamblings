@@ -7,7 +7,7 @@ const { frontmatter } = Astro.props;
   <h2 style="text-decoration:none;">{frontmatter.title}</h2>
   <ul class="badge__list">
     <li>
-      <span class="badge badge--item">PUBLISHED</span>{frontmatter.date}
+      <span class="badge badge--item">PUBLISHED</span>{frontmatter.date.toDateString()}
     </li>
     <li>
       <span class="badge badge--item">POST #{frontmatter.post}</span>
@@ -17,7 +17,7 @@ const { frontmatter } = Astro.props;
     </li>
   </ul>
   <div class="page-image">
-    <img width="400" alt={frontmatter.image.alt} src={frontmatter.image.url} />
+    <img width="400" alt={frontmatter.image.alt} src={`/posts/post-${frontmatter.post}.png`} />
   </div>
   <slot />
 </BaseLayout>
