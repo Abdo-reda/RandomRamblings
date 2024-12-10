@@ -14,12 +14,13 @@
     "deploy-function": "supabase functions deploy",
     "db-migrate": "supabase db push",
     "db-reset": "supabase db reset",
+    "sync": "astro sync",
     "astro": "astro"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.47.2",
     "@vercel/analytics": "^1.4.1",
-    "astro": "^4.1.3",
+    "astro": "^5.0.4",
     "astro-icon": "^1.1.4"
   },
   "devDependencies": {

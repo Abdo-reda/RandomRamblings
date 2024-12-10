@@ -1,12 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import logo from '../assets/main.png'; 
 const pageTitle = "RandomRamblings";
 ---
 <Layout pageTitle={pageTitle}>
     <div class="page-image">
-        <Image src={logo} alt="logo." width={500} />
+        <img width="500" alt="logo." src="/main.png" />
     </div>
     <h1>Random Ramblings</h1>
     <h2>About</h2>
