@@ -1,11 +1,11 @@
 ---
+post: 1
+draft: false
 title: 'Open Arms'
 author: NoPoint
-date: '2024-12-04'
+date: 2024-12-04
 tags: ['personal', 'life']
-post: 1
 image:
-    url: '/posts/post1.png'
     alt: 'Lotus Fruit'
 ---
 
