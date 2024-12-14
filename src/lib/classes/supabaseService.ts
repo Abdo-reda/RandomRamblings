@@ -1,8 +1,9 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { ISupabaseService } from "../interfaces/supabaseServiceInterface";
-import type { IConfirmEmailPayload } from "../interfaces/confirmEmailPayloadInterface";
+import type { ICreateNewsletterPayload } from "../interfaces/createNewsletterPayloadInterface";
 import type { FunctionsResponse } from "@supabase/functions-js";
 import { SupabaseFunctions } from "../enums/supabaseFunctionsEnum";
+import { SupabaseTables } from "../enums/supabaseTablesEnum";
 
 type SupabaseFunctionBody =
   | File
@@ -20,8 +21,7 @@ export class SupabaseService implements ISupabaseService {
     this.supabase = _supabase;
   }
 
-  async invokeConfirmNewsletter(payload: IConfirmEmailPayload) {
-    console.log("--- invoke edge method", payload);
+  async invokeConfirmNewsletterAsync(payload: ICreateNewsletterPayload) {
     try {
       await this.invokeFunctionPost(
         SupabaseFunctions.NEWSLETTER_CONFIRM_EMAIL,
@@ -35,11 +35,13 @@ export class SupabaseService implements ISupabaseService {
     }
   }
 
-  async invokeCreateNewsletterSubscription() {
-    console.log("--- invoking create subscription");
+  async invokeCreateNewsletterSubscriptionAsync(
+    payload: ICreateNewsletterPayload
+  ) {
     try {
       await this.invokeFunctionPost(
-        SupabaseFunctions.NEWSLETTER_CREATE_SUBSCRIPTION
+        SupabaseFunctions.NEWSLETTER_CREATE_SUBSCRIPTION,
+        payload
       );
     } catch (error) {
       console.log(
@@ -49,8 +51,23 @@ export class SupabaseService implements ISupabaseService {
     }
   }
 
-  isNewsletterEmailAlreadySubscribed(email: string): boolean {
+  async isNewsletterEmailAlreadySubscribed(email: string): Promise<boolean> {
+    // const { data, error } = await this.baseNewsletterUsersQuery().eq("name", "Albania");
+    const { data, error } = await this.baseNewsletterUsersQuery()
+    console.log('--- data', data);
+    console.log('--- error', error);
     return false;
+  }
+
+  private baseNewsletterUsersQuery() {
+    return this.supabase
+      .from(SupabaseTables.USERS)
+      .select(`
+        *,
+        ${SupabaseTables.NEWSLETTER_USERS} (
+          *
+        )
+      `);
   }
 
   private invokeFunctionAsync<T = any>(

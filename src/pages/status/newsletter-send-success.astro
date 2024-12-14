@@ -1,0 +1,15 @@
+---
+import BlankLayout from "../../layouts/BlankLayout.astro";
+export const prerender = true;
+const pageTitle = "Newsletter Send Success";
+---
+
+<BlankLayout pageTitle={pageTitle}>
+  <div class="page-image">
+    <img width="500" alt="blog-logo" src="/blog.png" />
+  </div>
+  <div>
+    <h2 style="font-size: 1.6rem;">Succcessfully Sent Confirmation Email!</h2>
+  </div>
+  <button style="margin: 36px" onclick="location.href='/'"class="btn"> Back To Home </button> 
+</BlankLayout>

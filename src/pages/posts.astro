@@ -1,15 +1,18 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../layouts/Layout.astro";
 import Card from "../components/CardPost.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+
+export const prerender = true;
+
 const allPosts = (await getCollection("posts", ({ data }) => {
   return import.meta.env.PROD ? data.draft !== true : true;
 })).sort((a,b) => a.id.localeCompare(b.id))
-const pageTitle = "Posts";
 
+const pageTitle = "Posts";
 ---
 
-<Layout pageTitle={pageTitle}>
+<MainLayout pageTitle={pageTitle}>
   <div class="page-image">
     <img width="500" alt="blog-logo" src="/blog.png" />
   </div>
@@ -26,4 +29,4 @@ const pageTitle = "Posts";
       ))
     }
   </ul>
-</Layout>
+</MainLayout>

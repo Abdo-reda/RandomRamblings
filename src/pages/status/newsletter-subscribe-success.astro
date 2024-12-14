@@ -1,0 +1,34 @@
+---
+import BlankLayout from "../../layouts/BlankLayout.astro";
+import jwt from 'jsonwebtoken'
+import type { ICreateNewsletterPayload } from "../../lib/interfaces/createNewsletterPayloadInterface";
+import type { INewsletterService } from "../../lib/interfaces/newsletterServiceInterface";
+import { supabaseNewsletterService } from "../../lib/clients/supabase";
+
+export const prerender = false;
+// const { url } = Astro.request;
+const token = Astro.url.searchParams.get('token') || '';
+const newsLetterService: INewsletterService = supabaseNewsletterService;
+
+const tempToken = jwt.decode(token);
+const pageTitle = "Newsletter Subscribe Success";
+
+try {
+  const decodedToken = jwt.verify(token, import.meta.env.CUSTOM_JWT_SECRET) as ICreateNewsletterPayload;
+  // await newsLetterService.createSubscription(decodedToken);
+} catch(error) {
+  console.log('--- invalid token')
+  // return Astro.redirect('/');
+}
+
+---
+
+<BlankLayout pageTitle={pageTitle}>
+  <div class="page-image">
+    <img width="500" alt="blog-logo" src="/blog.png" />
+  </div>
+  <div>
+    <h2 style="font-size: 1.6rem;">Succcessfully Subscribed to Newsletter!</h2>
+  </div>
+  <button style="margin: 36px" onclick="location.href='/'"class="btn"> Back To Home </button> 
+</BlankLayout>

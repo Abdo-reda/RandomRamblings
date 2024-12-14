@@ -1,49 +1,55 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { Tag } from "../lib/enums/tagEnum";
-const pageTitle = "Newsletter";
-import { supabaseService } from "../lib/clients/supabase";
+import MainLayout from "../layouts/MainLayout.astro";
+import { supabaseNewsletterService } from "../lib/clients/supabase";
 import type { NotificationFrequency } from "../lib/enums/notificationFrequencyEnum";
+import type { Theme } from "../lib/enums/themeEnum";
+import type { INewsletterService } from "../lib/interfaces/newsletterServiceInterface";
+import { isValidEmail, isValidNotification, isValidTheme } from "../lib/utilities/validationUtilities";
 
 export const prerender = false;
+const pageTitle = "Newsletter";
+const newsLetterService: INewsletterService = supabaseNewsletterService;
+const errors = { email: "", notification: "", theme: "" };
 
-const errors = { email: "", notification: "" };
+await newsLetterService.isAlreadySubscribed("3bdo.reda@gmail.com")
+
 if (Astro.request.method === "POST") {
-  console.log('==== here', Astro.request)
   try {
     const data = await Astro.request.formData();
-    console.log('==== blah', data)
     const email = data.get("email");
     const notification = data.get("notification");
+    const theme = data.get("theme");
 
-    if (typeof email !== "string") {
+    errors.email = "";
+    errors.notification = "";
+
+    if (typeof email !== "string" || !isValidEmail(email)) {
       errors.email = "Email is not valid. ";
     } else if (
-      await supabaseService.isNewsletterEmailAlreadySubscribed(email)
+      await newsLetterService.isAlreadySubscribed(email)
     ) {
       errors.email = "Email is already registered. ";
     }
 
-    if (typeof notification !== "string") {
+    if (typeof notification !== "string" || !isValidNotification(notification)) {
       errors.notification = "Notification is not valid. ";
     }
-    // if (typeof password !== "string" || password.length < 6) {
-    //   errors.password += "Password must be at least 6 characters. ";
-    // }
-    // const hasErrors = Object.values(errors).some(msg => msg)
-    // if (!hasErrors) {
-    // }
 
-    console.log("---- what", {
+    if (typeof theme !== "string" || !isValidTheme(theme)) {
+      errors.theme = "Theme is not valid. ";
+    }
+
+    const hasErrors = Object.values(errors).some(msg => msg)
+    
+    if (hasErrors) return; 
+ 
+    await newsLetterService.sendConfirmation({
       email: email as string,
       notification: notification as NotificationFrequency,
-    });
+      theme: theme as Theme,
+    })
 
-    // await supabaseService.invokeConfirmNewsletter({
-    //   email: email as string,
-    //   notification: notification as NotificationFrequency,
-    // });
-    // return Astro.redirect("/login"); //TODO: confirmation email sent page
+    return Astro.redirect("/status/newsletter-send-success")
   } catch (error) {
     if (error instanceof Error) {
       console.error(error.message);
@@ -52,7 +58,7 @@ if (Astro.request.method === "POST") {
 }
 ---
 
-<Layout pageTitle={pageTitle}>
+<MainLayout pageTitle={pageTitle}>
   <div class="page-image">
     <!-- <Image src={logo} alt="logo." width={500} /> -->
   </div>
@@ -63,7 +69,7 @@ if (Astro.request.method === "POST") {
       <form class="simple-form" method="POST">
         <div class="input-wrapper">
           <label for="email">Email</label>
-          <input class="input" type="email" required />
+          <input name="email" class="input" type="email" required />
         </div>
         <div>
           <label for="notification">Notification</label>
@@ -92,6 +98,32 @@ if (Astro.request.method === "POST") {
             </div>
           </div>
         </div>
+        <div>
+          <label for="theme">Theme</label>
+          <div class="radio-group">
+            <div>
+              <input
+                class="radio"
+                type="radio"
+                id="light"
+                name="theme"
+                value="light"
+              />
+              <label for="light">Light</label>
+            </div>
+
+            <div>
+              <input
+                class="radio"
+                type="radio"
+                id="dark"
+                name="theme"
+                value="dark"
+              />
+              <label for="dark">Dark</label>
+            </div>
+          </div>
+        </div>
         <!-- <div class="input-wrapper">
           <label for="tags">Tags</label>
           <div class="tags-wrapper">
@@ -110,4 +142,10 @@ if (Astro.request.method === "POST") {
       </form>
     </div>
   </fieldset>
-</Layout>
+</MainLayout>
+
+<script>
+  const theme = localStorage.getItem("theme");
+  const radioElement = document.getElementById(theme ?? 'dark') as HTMLInputElement;
+  radioElement.checked = true;
+</script>

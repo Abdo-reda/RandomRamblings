@@ -1,15 +1,43 @@
-import "jsr:@supabase/functions-js/edge-runtime.d.ts";
-import type { IConfirmEmailPayload } from "../../../src/lib/interfaces/confirmEmailPayloadInterface";
+import React from "npm:react@19.0.0";
+import jwt from "npm:jsonwebtoken@9.0.2";
+import { render } from "npm:@react-email/components@0.0.31";
+import { NewsletterConfirmationEmail } from "../_shared/email-templates/newsletter-confirm-email.tsx";
+import type { ICreateNewsletterPayload } from "../../../src/lib/interfaces/createNewsletterPayloadInterface.ts";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+const JWT_SECRET = Deno.env.get("CUSTOM_JWT_SECRET");
 
-const handler = async (_request: Request): Promise<Response> => {
-  // console.log('--- payload', payload);
+//what if the email doesn't make sense, like 1231312@2r12512.com
+
+const handler = async (req: Request): Promise<Response> => {
+  if (req.method !== "POST") {
+    return new Response("not allowed", { status: 400 });
+  }
 
   try {
-    const payload: IConfirmEmailPayload = await _request.json();
+    const payload: ICreateNewsletterPayload = await req.json();
 
-    console.log("[newsletter-confirm-email] Parsed payload:", payload);
+    let token = jwt.sign(payload, JWT_SECRET)
+
+    console.log("-- temp", token)
+
+    const html = await render(
+      React.createElement(NewsletterConfirmationEmail, {
+        theme: payload.theme,
+        token: token,
+      })
+    );
+
+    const text = await render(
+      React.createElement(NewsletterConfirmationEmail, {
+        theme: payload.theme,
+        token: token,
+      })
+      ,
+      {
+        plainText: true,
+      }
+    );
 
     // const res = await fetch("https://api.resend.com/emails", {
     //   method: "POST",
@@ -21,16 +49,14 @@ const handler = async (_request: Request): Promise<Response> => {
     //     from: "onboarding@resend.dev", //who the fuck? and where?
     //     to: "3bdo.reda@gmail.com", //payload.email
     //     subject: "Newlsetter Confirmation",
-    //     html: "<strong>it works!</strong>", //where and from who? local template?
+    //     html: html, 
+    //     text: text,
     //   }),
     // });
-
-    // const data = await res.json();
 
     return new Response(
       JSON.stringify({
         message: `Successfully Sent Confirmation Email to ${payload.email}`,
-        // data: data,
       }),
       {
         status: 200,
@@ -41,7 +67,7 @@ const handler = async (_request: Request): Promise<Response> => {
     );
   } catch (error) {
     console.error(
-      "[newsletter-confirm-email] Error, maybe invalid json or unable to reach resend",
+      "[newsletter-confirm-email] Error, maybe invalid json or maybe unable to reach resend ...",
       error
     );
 

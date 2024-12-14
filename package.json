@@ -3,27 +3,35 @@
   "author": "NoPoint",
   "description": "A Personal Blog Full of Random Ramblings.",
   "type": "module",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "vercel": "vercel dev",
+    "supabase-stop": "supabase stop",
     "supabase": "supabase start",
+    "supabase-status": "supabase status",
+    "supabase-migrate": "supabase db push",
     "functions": "supabase functions serve --no-verify-jwt --env-file .env",
-    "deploy-function": "supabase functions deploy",
+    "deploy-functions": "supabase functions deploy",
     "db-migrate": "supabase db push",
     "db-reset": "supabase db reset",
     "sync": "astro sync",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/vercel": "^8.0.0",
     "@supabase/supabase-js": "^2.47.2",
     "@vercel/analytics": "^1.4.1",
     "astro": "^5.0.4",
-    "astro-icon": "^1.1.4"
+    "astro-icon": "^1.1.4",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
-    "supabase": "^2.0.0"
+    "supabase": "^2.0.0",
+    "vercel": "^39.2.0",
+    "@types/jsonwebtoken": "^9.0.7"
   }
 }
