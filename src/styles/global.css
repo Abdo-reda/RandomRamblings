@@ -264,7 +264,8 @@ h6 {
 }
 
 small {
-  color: var(--dark-lighter)
+  color: var(--dark-lighter);
+  font-size: 0.9rem;
 }
 
 h1 {
@@ -578,10 +579,6 @@ blockquote::after {
   padding: 0 0.5rem;
 }
 
-.icon__btn > a:hover {
-  border: 2px solid var(--primary);
-}
-
 .icon__link {
   display: flex;
   padding: 8px;
@@ -658,12 +655,13 @@ html.light {
   color: var(--light);
 }
 
-.light .icon__link {
-  /* border: 2px solid var(--dark); */
-}
-
 .light .badge__link {
   color: var(--primary-light);
+}
+
+.error {
+  color: var(--primary-light);
+  padding: 8px 0px;
 }
 
 /* Media Query */

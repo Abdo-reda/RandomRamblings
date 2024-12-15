@@ -14,7 +14,7 @@ export class SupabaseNewsletterService implements INewsletterService {
   }
 
   async createSubscription(payload: ICreateNewsletterPayload) {
-    await this.supabaseService.invokeCreateNewsletterSubscriptionAsync(payload);
+    await this.supabaseService.createNewsletterSubscriptionAsync(payload);
   }
 
   async isAlreadySubscribed(email: string): Promise<boolean> {

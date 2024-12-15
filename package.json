@@ -6,20 +6,21 @@
   "version": "2.1.0",
   "scripts": {
     "dev": "astro dev",
+    "local": "astro dev --mode local-dev",
     "start": "astro dev",
     "build": "astro build",
+    "sync": "astro sync",
+    "astro": "astro",
     "preview": "astro preview",
     "vercel": "vercel dev",
-    "supabase-stop": "supabase stop",
     "supabase": "supabase start",
+    "supabase-stop": "supabase stop",
     "supabase-status": "supabase status",
     "supabase-migrate": "supabase db push",
-    "functions": "supabase functions serve --no-verify-jwt --env-file .env",
-    "deploy-functions": "supabase functions deploy",
-    "db-migrate": "supabase db push",
-    "db-reset": "supabase db reset",
-    "sync": "astro sync",
-    "astro": "astro"
+    "supabase-local-migrate": "supabase migration up ",
+    "supabase-local-reset": "supabase db reset",
+    "supabase-functions": "supabase functions serve --no-verify-jwt --env-file .env",
+    "supabase-deploy-functions": "supabase functions deploy"
   },
   "dependencies": {
     "@astrojs/vercel": "^8.0.0",

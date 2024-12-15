@@ -1,61 +1,15 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import { supabaseNewsletterService } from "../lib/clients/supabase";
-import type { NotificationFrequency } from "../lib/enums/notificationFrequencyEnum";
-import type { Theme } from "../lib/enums/themeEnum";
-import type { INewsletterService } from "../lib/interfaces/newsletterServiceInterface";
-import { isValidEmail, isValidNotification, isValidTheme } from "../lib/utilities/validationUtilities";
+import { actions } from 'astro:actions';
 
 export const prerender = false;
 const pageTitle = "Newsletter";
-const newsLetterService: INewsletterService = supabaseNewsletterService;
-const errors = { email: "", notification: "", theme: "" };
 
-await newsLetterService.isAlreadySubscribed("3bdo.reda@gmail.com")
-
-if (Astro.request.method === "POST") {
-  try {
-    const data = await Astro.request.formData();
-    const email = data.get("email");
-    const notification = data.get("notification");
-    const theme = data.get("theme");
-
-    errors.email = "";
-    errors.notification = "";
-
-    if (typeof email !== "string" || !isValidEmail(email)) {
-      errors.email = "Email is not valid. ";
-    } else if (
-      await newsLetterService.isAlreadySubscribed(email)
-    ) {
-      errors.email = "Email is already registered. ";
-    }
-
-    if (typeof notification !== "string" || !isValidNotification(notification)) {
-      errors.notification = "Notification is not valid. ";
-    }
-
-    if (typeof theme !== "string" || !isValidTheme(theme)) {
-      errors.theme = "Theme is not valid. ";
-    }
-
-    const hasErrors = Object.values(errors).some(msg => msg)
-    
-    if (hasErrors) return; 
- 
-    await newsLetterService.sendConfirmation({
-      email: email as string,
-      notification: notification as NotificationFrequency,
-      theme: theme as Theme,
-    })
-
-    return Astro.redirect("/status/newsletter-send-success")
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    }
-  }
+const result = Astro.getActionResult(actions.newsletter.sendConfirmation);
+if (result && !result.error) {
+  return Astro.redirect("/status/newsletter-confirmation-success");
 }
+
 ---
 
 <MainLayout pageTitle={pageTitle}>
@@ -66,7 +20,10 @@ if (Astro.request.method === "POST") {
   <fieldset>
     <legend>Subscription</legend>
     <div class="page-wrapper">
-      <form class="simple-form" method="POST">
+      <form class="simple-form" method="POST" action={actions.newsletter.sendConfirmation}>
+        {result?.error && (
+          <label class="error">ERROR: {result.error.message}.</label>
+        )}
         <div class="input-wrapper">
           <label for="email">Email</label>
           <input name="email" class="input" type="email" required />
@@ -146,6 +103,8 @@ if (Astro.request.method === "POST") {
 
 <script>
   const theme = localStorage.getItem("theme");
-  const radioElement = document.getElementById(theme ?? 'dark') as HTMLInputElement;
+  const radioElement = document.getElementById(
+    theme ?? "dark"
+  ) as HTMLInputElement;
   radioElement.checked = true;
 </script>

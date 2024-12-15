@@ -4,6 +4,6 @@ import type { ICreateNewsletterPayload } from "./createNewsletterPayloadInterfac
 export interface ISupabaseService {
 	supabase: SupabaseClient<any, "public", any>;
 	invokeConfirmNewsletterAsync: (payload: ICreateNewsletterPayload) => void;
-	invokeCreateNewsletterSubscriptionAsync: (payload: ICreateNewsletterPayload) => void;
+	createNewsletterSubscriptionAsync: (payload: ICreateNewsletterPayload) => void;
 	isNewsletterEmailAlreadySubscribed: (email: string) => Promise<boolean>;
 }

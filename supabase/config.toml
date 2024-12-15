@@ -253,10 +253,10 @@ verify_jwt = true
 entrypoint = "./functions/newsletter-create-subscription/index.ts"
 # import_map = "./functions/MY_FUNCTION_NAME/deno.json"
 
-[functions.newsletter-confirm-email]
-enabled = true
-verify_jwt = true
-entrypoint = "./functions/newsletter-confirm-email/index.ts"
+# [functions.newsletter-confirm-email]
+# enabled = true
+# verify_jwt = true
+# entrypoint = "./functions/newsletter-confirm-email/index.ts"
 
 [analytics]
 enabled = true

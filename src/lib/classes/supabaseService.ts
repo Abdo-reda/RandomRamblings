@@ -35,40 +35,50 @@ export class SupabaseService implements ISupabaseService {
     }
   }
 
-  async invokeCreateNewsletterSubscriptionAsync(
-    payload: ICreateNewsletterPayload
-  ) {
-    try {
-      await this.invokeFunctionPost(
-        SupabaseFunctions.NEWSLETTER_CREATE_SUBSCRIPTION,
-        payload
-      );
-    } catch (error) {
-      console.log(
-        "[SupabaseService]: Error invoking newsletter-create-subscription function",
-        error
-      );
+  async createNewsletterSubscriptionAsync(payload: ICreateNewsletterPayload) {
+    const { data: users, error: usersError } = await this.supabase
+      .from(SupabaseTables.USERS)
+      .upsert({ email: payload.email }, { onConflict: "email" })
+      .select();
+
+    if (!users?.length || usersError) {
+      throw new Error("Unable to Upsert User.");
+    }
+
+    const user = users[0];
+    const { data, error } = await this.supabase
+      .from(SupabaseTables.NEWSLETTER_USERS)
+      .upsert(
+        {
+          user_id: user.id,
+          active: true,
+          theme: payload.theme,
+          notification: payload.notification,
+        },
+        { onConflict: "user_id" }
+      )
+      .select();
+
+    if (!data?.length || error) {
+      throw new Error("Unable to Upsert Newsletter Users.");
     }
   }
 
   async isNewsletterEmailAlreadySubscribed(email: string): Promise<boolean> {
-    // const { data, error } = await this.baseNewsletterUsersQuery().eq("name", "Albania");
-    const { data, error } = await this.baseNewsletterUsersQuery()
-    console.log('--- data', data);
-    console.log('--- error', error);
-    return false;
+    const { data } = await this.baseNewsletterUsersQuery()
+      .eq("email", email)
+      .eq("NewsletterUsers.active", true);
+    return !!data?.length;
   }
 
   private baseNewsletterUsersQuery() {
-    return this.supabase
-      .from(SupabaseTables.USERS)
-      .select(`
+    return this.supabase.from(SupabaseTables.USERS).select(`
         *,
-        ${SupabaseTables.NEWSLETTER_USERS} (
-          *
-        )
+        ${SupabaseTables.NEWSLETTER_USERS}!inner(*)
       `);
   }
+
+  private;
 
   private invokeFunctionAsync<T = any>(
     name: SupabaseFunctions,

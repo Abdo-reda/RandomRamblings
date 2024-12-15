@@ -7,8 +7,6 @@ import type { ICreateNewsletterPayload } from "../../../src/lib/interfaces/creat
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const JWT_SECRET = Deno.env.get("CUSTOM_JWT_SECRET");
 
-//what if the email doesn't make sense, like 1231312@2r12512.com
-
 const handler = async (req: Request): Promise<Response> => {
   if (req.method !== "POST") {
     return new Response("not allowed", { status: 400 });
@@ -18,8 +16,6 @@ const handler = async (req: Request): Promise<Response> => {
     const payload: ICreateNewsletterPayload = await req.json();
 
     let token = jwt.sign(payload, JWT_SECRET)
-
-    console.log("-- temp", token)
 
     const html = await render(
       React.createElement(NewsletterConfirmationEmail, {
@@ -39,20 +35,20 @@ const handler = async (req: Request): Promise<Response> => {
       }
     );
 
-    // const res = await fetch("https://api.resend.com/emails", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${RESEND_API_KEY}`,
-    //   },
-    //   body: JSON.stringify({
-    //     from: "onboarding@resend.dev", //who the fuck? and where?
-    //     to: "3bdo.reda@gmail.com", //payload.email
-    //     subject: "Newlsetter Confirmation",
-    //     html: html, 
-    //     text: text,
-    //   }),
-    // });
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: "nopoint@random-ramblings.me",
+        to: payload.email,
+        subject: "Newlsetter Confirmation",
+        html: html, 
+        text: text,
+      }),
+    });
 
     return new Response(
       JSON.stringify({
@@ -67,7 +63,7 @@ const handler = async (req: Request): Promise<Response> => {
     );
   } catch (error) {
     console.error(
-      "[newsletter-confirm-email] Error, maybe invalid json or maybe unable to reach resend ...",
+      "[newsletter-confirm-email] Error, maybe invalid json, email or maybe unable to reach resend ...",
       error
     );
 
