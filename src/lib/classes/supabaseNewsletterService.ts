@@ -20,4 +20,8 @@ export class SupabaseNewsletterService implements INewsletterService {
   async isAlreadySubscribed(email: string): Promise<boolean> {
    	return this.supabaseService.isNewsletterEmailAlreadySubscribed(email);
   }
+
+  async deactivateSubscription(email: string) {
+    await this.supabaseService.deactivateSubscription(email);
+  }
 }

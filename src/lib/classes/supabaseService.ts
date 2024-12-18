@@ -71,14 +71,32 @@ export class SupabaseService implements ISupabaseService {
     return !!data?.length;
   }
 
+  async deactivateSubscription(email: string) {
+    const { data: user, error: userError } =
+      await this.baseNewsletterUsersQuery().eq("email", email).single();
+
+    if (userError || !user) {
+      console.error(`Error fetching user with email ${email}:`, userError);
+      return;
+    }
+
+    const { error } = await this.supabase
+      .from(SupabaseTables.NEWSLETTER_USERS)
+      .update({ active: false })
+      .eq("user_id", user.id);
+
+    if (error) {
+      console.error(`Error updating newsletter user with email ${email}:`, userError);
+      return;
+    }
+  }
+
   private baseNewsletterUsersQuery() {
     return this.supabase.from(SupabaseTables.USERS).select(`
         *,
         ${SupabaseTables.NEWSLETTER_USERS}!inner(*)
       `);
   }
-
-  private;
 
   private invokeFunctionAsync<T = any>(
     name: SupabaseFunctions,

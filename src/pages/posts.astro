@@ -5,9 +5,11 @@ import MainLayout from "../layouts/MainLayout.astro";
 
 export const prerender = true;
 
-const allPosts = (await getCollection("posts", ({ data }) => {
-  return import.meta.env.PROD ? data.draft !== true : true;
-})).sort((a,b) => a.id.localeCompare(b.id))
+const allPosts = (
+  await getCollection("posts", ({ data }) =>
+    import.meta.env.PROD ? data.draft !== true : true
+  )
+).sort((a, b) => a.id.localeCompare(b.id));
 
 const pageTitle = "Posts";
 ---

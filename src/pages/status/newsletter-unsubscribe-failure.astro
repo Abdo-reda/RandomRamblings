@@ -1,0 +1,15 @@
+---
+import SimpleStatus from "../../components/SimpleStatus.astro";
+import BlankLayout from "../../layouts/BlankLayout.astro";
+export const prerender = true;
+const pageTitle = "Unsubscribe Failure";
+---
+
+<BlankLayout pageTitle={pageTitle}>
+  <SimpleStatus
+    imgSrc="main.png"
+    imgAlt="Unsubscribe Failure"
+    mainHeading="Failed to Unsubscribe from Newsletter :("
+    subHeading="Sorry, there was an issue deleting the subscription, we are working on it, thanks for your patience and please try again later."
+  />
+</BlankLayout>

@@ -7,3 +7,7 @@ export const ValidationCreateNewsletterPayload = z.object({
   notification: z.nativeEnum(NotificationFrequency),
   theme: z.nativeEnum(Theme),
 });
+
+export const ValidationDeleteNewsletterPayload = z.object({
+  email: z.string(),
+});

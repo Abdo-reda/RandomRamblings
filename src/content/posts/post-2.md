@@ -2,6 +2,7 @@
 post: 2
 draft: false
 title: 'Tech Boundaries'
+summary: 'Discussing the role of technology in games and when to push the boundaries.'
 author: NoPoint
 date: 2024-12-05
 tags: ['game-design', 'technology']

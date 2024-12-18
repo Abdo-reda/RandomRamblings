@@ -35,7 +35,7 @@ const handler = async (req: Request): Promise<Response> => {
       }
     );
 
-    const res = await fetch("https://api.resend.com/emails", {
+    await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

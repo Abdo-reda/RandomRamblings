@@ -6,4 +6,5 @@ export interface ISupabaseService {
 	invokeConfirmNewsletterAsync: (payload: ICreateNewsletterPayload) => void;
 	createNewsletterSubscriptionAsync: (payload: ICreateNewsletterPayload) => void;
 	isNewsletterEmailAlreadySubscribed: (email: string) => Promise<boolean>;
+	deactivateSubscription: (email: string) => void;
 }

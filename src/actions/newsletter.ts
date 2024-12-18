@@ -1,7 +1,7 @@
 import { ActionError, defineAction } from "astro:actions";
 import { supabaseNewsletterService } from "../lib/clients/supabase";
 import type { INewsletterService } from "../lib/interfaces/newsletterServiceInterface";
-import { ValidationCreateNewsletterPayload } from "../lib/validations/createNewsletterPayloadValidation";
+import { ValidationCreateNewsletterPayload, ValidationDeleteNewsletterPayload } from "../lib/validations/createNewsletterPayloadValidation";
 
 const newsLetterService: INewsletterService = supabaseNewsletterService;
 
@@ -10,6 +10,12 @@ export const newsletter = {
     input: ValidationCreateNewsletterPayload,
     handler: async (input) => {
       await newsLetterService.createSubscription(input);
+    },
+  }),
+  deactivateSubscription: defineAction({
+    input: ValidationDeleteNewsletterPayload,
+    handler: async (input) => {
+      await newsLetterService.deactivateSubscription(input.email);
     },
   }),
   sendConfirmation: defineAction({
