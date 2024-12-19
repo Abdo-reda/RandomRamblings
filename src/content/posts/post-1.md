@@ -2,6 +2,7 @@
 post: 1
 draft: false
 title: 'Open Arms'
+summary: 'The first post! I talk about future plans and being in the right mindset.'
 author: NoPoint
 date: 2024-12-04
 tags: ['personal', 'life']

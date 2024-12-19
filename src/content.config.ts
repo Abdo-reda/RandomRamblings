@@ -5,9 +5,10 @@ import { Tag } from "./lib/enums/tagEnum";
 const posts = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/posts" }),
   schema: z.object({
-	post: z.number(),
-	draft: z.boolean(),
+    post: z.number(),
+    draft: z.boolean(),
     title: z.string(),
+    summary: z.string(),
     author: z.string(),
     date: z.date(),
     tags: z.array(z.nativeEnum(Tag)),

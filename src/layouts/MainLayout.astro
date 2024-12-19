@@ -1,0 +1,14 @@
+---
+import IndexLayout from "./IndexLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+const { pageTitle } = Astro.props;
+---
+
+<IndexLayout pageTitle={pageTitle}>
+  <Header />
+  <main>
+    <slot />
+    <Footer />
+  </main>
+</IndexLayout>

@@ -1,0 +1,11 @@
+---
+import IndexLayout from "./IndexLayout.astro";
+
+const { pageTitle } = Astro.props;
+---
+
+<IndexLayout pageTitle={pageTitle}>
+  <main class="blank-page">
+	<slot />
+  </main>
+</IndexLayout>
