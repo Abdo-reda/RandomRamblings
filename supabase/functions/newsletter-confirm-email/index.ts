@@ -15,7 +15,7 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const payload: ICreateNewsletterPayload = await req.json();
 
-    let token = jwt.sign(payload, JWT_SECRET)
+    let token = jwt.sign(payload, JWT_SECRET);
 
     const html = await render(
       React.createElement(NewsletterConfirmationEmail, {
@@ -28,8 +28,7 @@ const handler = async (req: Request): Promise<Response> => {
       React.createElement(NewsletterConfirmationEmail, {
         theme: payload.theme,
         token: token,
-      })
-      ,
+      }),
       {
         plainText: true,
       }
@@ -45,7 +44,7 @@ const handler = async (req: Request): Promise<Response> => {
         from: "nopoint@random-ramblings.me",
         to: payload.email,
         subject: "Newlsetter Confirmation",
-        html: html, 
+        html: html,
         text: text,
       }),
     });
@@ -68,7 +67,7 @@ const handler = async (req: Request): Promise<Response> => {
     );
 
     return new Response(
-      JSON.stringify({ error: "Invalid or missing JSON payload" }),
+      JSON.stringify({ error: `An Error has occured. ${error?.message}` }),
       {
         status: 400,
         headers: { "Content-Type": "application/json" },

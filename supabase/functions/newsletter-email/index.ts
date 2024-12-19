@@ -116,7 +116,7 @@ const handler = async (req: Request): Promise<Response> => {
     );
 
     return new Response(
-      JSON.stringify({ error: "Invalid or missing JSON payload" }),
+      JSON.stringify({ error: `An Error has occured. ${error?.message}` }),
       {
         status: 400,
         headers: { "Content-Type": "application/json" },

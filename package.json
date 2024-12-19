@@ -21,7 +21,7 @@
     "supabase-local-reset": "supabase db reset",
     "supabase-functions": "supabase functions serve --no-verify-jwt --env-file .env",
     "supabase-functions-local": "supabase functions serve --no-verify-jwt --env-file .env.local-dev",
-    "supabase-deploy-functions": "supabase functions deploy"
+    "supabase-functions-deploy": "supabase functions deploy"
   },
   "dependencies": {
     "@astrojs/vercel": "^8.0.0",
