@@ -1,8 +1,8 @@
----
-import BaseLayout from './Layout.astro';
+<!-- ---
+import MainLayout from './Layout.astro';
 const { frontmatter } = Astro.props;
 ---
-<BaseLayout pageTitle={frontmatter.title}>
+<MainLayout pageTitle={frontmatter.title}>
     <div class="gif">
         <img width="300" height="259" alt="RaccoonLaptopGif" src="/laptop.webp"/>
     </div>
@@ -18,5 +18,5 @@ const { frontmatter } = Astro.props;
         <img class="pro-img" width="500px" height="281" src={frontmatter.worksImage1.url} alt={frontmatter.worksImage1.alt} />
         <img class="pro-img" width="500px" height="281" src={frontmatter.worksImage2.url} alt={frontmatter.worksImage2.alt} />
     </div>
-</BaseLayout>
-
+</MainLayout>
+ -->
