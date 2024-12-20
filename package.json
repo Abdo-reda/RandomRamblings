@@ -27,7 +27,7 @@
     "@astrojs/vercel": "^8.0.0",
     "@supabase/supabase-js": "^2.47.2",
     "@vercel/analytics": "^1.4.1",
-    "astro": "^5.0.4",
+    "astro": "^5.1.0",
     "astro-icon": "^1.1.4",
     "jsonwebtoken": "^9.0.2"
   },
