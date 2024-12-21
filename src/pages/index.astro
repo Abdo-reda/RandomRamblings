@@ -1,4 +1,5 @@
 ---
+import PageImage from '../components/PageImage.astro';
 import MainLayout from '../layouts/MainLayout.astro';
 
 export const prerender = true;
@@ -6,9 +7,7 @@ export const prerender = true;
 const pageTitle = "RandomRamblings";
 ---
 <MainLayout pageTitle={pageTitle}>
-    <div class="page-image">
-        <img width="500" alt="logo." src="/main.png" />
-    </div>
+    <PageImage img="main" imgAlt="main logo" />
     <h1>Random Ramblings</h1>
     <h2>About</h2>
     <p> A space to dump the contents of my brain. This blog is 100% me, and nothing is computer generated (otherwise, there would be <span class="highlight"> nopoint </span> of a blog). </p>

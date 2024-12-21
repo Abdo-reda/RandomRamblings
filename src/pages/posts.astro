@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Card from "../components/CardPost.astro";
 import MainLayout from "../layouts/MainLayout.astro";
+import PageImage from "../components/PageImage.astro";
 
 export const prerender = true;
 
@@ -15,16 +16,14 @@ const pageTitle = "Posts";
 ---
 
 <MainLayout pageTitle={pageTitle}>
-  <div class="page-image">
-    <img width="500" alt="blog-logo" src="/blog.png" />
-  </div>
+  <PageImage img="posts" imgAlt="posts logo" />
   <h2>Blog</h2>
   <ul role="list" class="link-card-grid">
     {
       allPosts.map((cardPost) => (
         <Card
           url={`/posts/${cardPost.id}`}
-          image={`/posts/${cardPost.id}.png`}
+          image={`/posts/${cardPost.id}.webp`}
           title={cardPost.data.title}
           date={cardPost.data.date}
         />

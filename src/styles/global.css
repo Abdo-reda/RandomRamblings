@@ -27,6 +27,53 @@
   text-align: center;
 }
 
+.page-image-container {
+  padding: 20px 0px;
+  text-align: center;
+  position: relative;
+}
+
+.page-image-container img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+}
+
+.light-image {
+  display: none;
+}
+
+.light .light-image {
+  display: block;
+}
+
+.light .dark-image {
+  display: none;
+}
+
+
+.waves-bg {
+  will-change: background-position;
+  margin: auto;
+  width: 500px;
+  height: 220px;
+  background-size: contain;
+  background-image: url('waves-bg.webp');
+  background-repeat: repeat;
+  animation: moveBackground 14s linear infinite;
+}
+
+@keyframes moveBackground {
+  from {
+      background-position-x: 0;
+  }
+
+  to {
+      background-position-x: 368px; 
+  }
+}
+
 .input {
   max-width: 70%;
 }

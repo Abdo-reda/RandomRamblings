@@ -1,6 +1,7 @@
 ---
+import PageImage from "../components/PageImage.astro";
 import MainLayout from "../layouts/MainLayout.astro";
-import { actions } from 'astro:actions';
+import { actions } from "astro:actions";
 
 export const prerender = false;
 const pageTitle = "Newsletter";
@@ -9,21 +10,15 @@ const result = Astro.getActionResult(actions.newsletter.sendConfirmation);
 if (result && !result.error) {
   return Astro.redirect("/status/newsletter-confirmation-success");
 }
-
 ---
 
 <MainLayout pageTitle={pageTitle}>
-  <div class="page-image">
-    <!-- <Image src={logo} alt="logo." width={500} /> -->
-  </div>
-  <h1>Newsletter</h1>
+  <PageImage img="newsletter" imgAlt="newsletter logo" />
   <fieldset>
-    <legend>Subscription</legend>
+    <legend>Newsletter Subscription</legend>
     <div class="page-wrapper">
       <form class="simple-form" method="POST" action={actions.newsletter.sendConfirmation}>
-        {result?.error && (
-          <label class="error">ERROR: {result.error.message}.</label>
-        )}
+        {result?.error && <label class="error">ERROR: {result.error.message}.</label>}
         <div class="input-wrapper">
           <label for="email">Email</label>
           <input name="email" class="input" type="email" required />
@@ -32,25 +27,12 @@ if (result && !result.error) {
           <label for="notification">Notification</label>
           <div class="radio-group">
             <div>
-              <input
-                class="radio"
-                type="radio"
-                id="weekly"
-                name="notification"
-                value="weekly"
-                checked
-              />
+              <input class="radio" type="radio" id="weekly" name="notification" value="weekly" checked />
               <label for="weekly">Weekly</label>
             </div>
 
             <div>
-              <input
-                class="radio"
-                type="radio"
-                id="monthly"
-                name="notification"
-                value="monthly"
-              />
+              <input class="radio" type="radio" id="monthly" name="notification" value="monthly" />
               <label for="monthly">Monthly</label>
             </div>
           </div>
@@ -59,24 +41,12 @@ if (result && !result.error) {
           <label for="theme">Theme</label>
           <div class="radio-group">
             <div>
-              <input
-                class="radio"
-                type="radio"
-                id="light"
-                name="theme"
-                value="light"
-              />
+              <input class="radio" type="radio" id="light" name="theme" value="light" />
               <label for="light">Light</label>
             </div>
 
             <div>
-              <input
-                class="radio"
-                type="radio"
-                id="dark"
-                name="theme"
-                value="dark"
-              />
+              <input class="radio" type="radio" id="dark" name="theme" value="dark" />
               <label for="dark">Dark</label>
             </div>
           </div>
@@ -103,8 +73,6 @@ if (result && !result.error) {
 
 <script>
   const theme = localStorage.getItem("theme");
-  const radioElement = document.getElementById(
-    theme ?? "dark"
-  ) as HTMLInputElement;
+  const radioElement = document.getElementById(theme ?? "dark") as HTMLInputElement;
   radioElement.checked = true;
 </script>
