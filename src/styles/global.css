@@ -59,7 +59,7 @@
   width: 500px;
   height: 220px;
   background-size: contain;
-  background-image: url('waves-bg.webp');
+  background-image: url('/waves-bg.webp');
   background-repeat: repeat;
   animation: moveBackground 14s linear infinite;
 }
