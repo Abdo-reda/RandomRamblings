@@ -2,9 +2,9 @@
 const { imgSrc, imgAlt, mainHeading, subHeading } = Astro.props;
 ---
 
-<div class="page-image">
+{imgSrc && <div class="page-image">
   <img width="500" alt={imgAlt} src={`/${imgSrc}`} />
-</div>
+</div>}
 <div>
   <h2 style="font-size: 1.6rem;">{mainHeading}</h2>
 </div>
