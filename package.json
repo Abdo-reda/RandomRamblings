@@ -3,18 +3,36 @@
   "author": "NoPoint",
   "description": "A Personal Blog Full of Random Ramblings.",
   "type": "module",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "scripts": {
     "dev": "astro dev",
+    "local": "astro dev --mode local-dev --host",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
     "sync": "astro sync",
-    "astro": "astro"
+    "astro": "astro",
+    "preview": "astro preview",
+    "vercel": "vercel dev",
+    "supabase": "supabase start",
+    "supabase-stop": "supabase stop",
+    "supabase-status": "supabase status",
+    "supabase-migrate": "supabase db push",
+    "supabase-local-migrate": "supabase migration up ",
+    "supabase-local-reset": "supabase db reset",
+    "supabase-functions": "supabase functions serve --no-verify-jwt --env-file .env",
+    "supabase-functions-local": "supabase functions serve --no-verify-jwt --env-file .env.local-dev",
+    "supabase-functions-deploy": "supabase functions deploy"
   },
   "dependencies": {
+    "@astrojs/vercel": "^8.0.0",
+    "@supabase/supabase-js": "^2.47.2",
     "@vercel/analytics": "^1.4.1",
-    "astro": "^5.0.4",
-    "astro-icon": "^1.1.4"
+    "astro": "^5.1.0",
+    "astro-icon": "^1.1.4",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "supabase": "^2.0.0",
+    "@types/jsonwebtoken": "^9.0.7"
   }
 }

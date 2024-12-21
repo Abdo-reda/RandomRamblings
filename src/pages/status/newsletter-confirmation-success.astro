@@ -1,0 +1,13 @@
+---
+import SimpleStatus from "../../components/SimpleStatus.astro";
+import BlankLayout from "../../layouts/BlankLayout.astro";
+export const prerender = true;
+const pageTitle = "Newsletter Confirmation";
+---
+
+<BlankLayout pageTitle={pageTitle}>
+  <SimpleStatus
+    imgAlt="Confirmation Success"
+    mainHeading="Succcessfully Sent Confirmation Email!"
+  />
+</BlankLayout>

@@ -1,9 +1,11 @@
 import { defineConfig } from 'astro/config';
-
+import vercel from '@astrojs/vercel';
 import icon from 'astro-icon';
 
-// https://astro.build/config
 export default defineConfig({
-  trailingSlash: 'never', 
-  integrations: [icon()]
+  site: 'https://www.random-ramblings.me',
+  trailingSlash: 'never',
+  output: 'static',
+  adapter: vercel(),
+  integrations: [icon()],
 });

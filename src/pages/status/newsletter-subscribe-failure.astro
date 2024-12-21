@@ -1,0 +1,14 @@
+---
+import SimpleStatus from "../../components/SimpleStatus.astro";
+import BlankLayout from "../../layouts/BlankLayout.astro";
+export const prerender = true;
+const pageTitle = "Newsletter Failure";
+---
+
+<BlankLayout pageTitle={pageTitle}>
+  <SimpleStatus
+    imgAlt="Subscription Failure"
+    mainHeading="Failed to Create Newsletter Subscription :("
+    subHeading="Sorry, there was an issue creating the subscription, we are working on it, thanks for your patience and please try again later."
+  />
+</BlankLayout>

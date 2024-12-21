@@ -1,0 +1,31 @@
+---
+import { actions } from 'astro:actions';
+import jwt from "jsonwebtoken";
+import BlankLayout from "../../layouts/BlankLayout.astro";
+import SimpleStatus from "../../components/SimpleStatus.astro";
+import type { IDeleteNewsletterPayload } from '../../lib/interfaces/deleteNewsletterPayloadInterface';
+
+export const prerender = false;
+
+const token = Astro.url.searchParams.get("token") || "";
+const pageTitle = "Unsubscribe Success";
+
+try {
+  const decodedToken = jwt.verify(
+    token,
+    import.meta.env.CUSTOM_JWT_SECRET
+  ) as IDeleteNewsletterPayload;
+  await Astro.callAction(actions.newsletter.deactivateSubscription.orThrow, decodedToken);
+} catch (error) {
+  console.log("[newsletter-subscribe-success]: invalid token", error);
+  return Astro.redirect('/status/newsletter-unsubscribe-failure');
+}
+---
+
+<BlankLayout pageTitle={pageTitle}>
+  <SimpleStatus
+    imgAlt="Unsubscribed"
+    mainHeading="Succcessfully Unsubscribed to Newsletter :("
+    subHeading="Feel free to contact me and tell me what happened."
+  />
+</BlankLayout>

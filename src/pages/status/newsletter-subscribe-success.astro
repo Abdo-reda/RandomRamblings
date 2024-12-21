@@ -1,0 +1,30 @@
+---
+import { actions } from 'astro:actions';
+import jwt from "jsonwebtoken";
+import type { ICreateNewsletterPayload } from "../../lib/interfaces/createNewsletterPayloadInterface";
+import BlankLayout from "../../layouts/BlankLayout.astro";
+import SimpleStatus from "../../components/SimpleStatus.astro";
+
+export const prerender = false;
+
+const token = Astro.url.searchParams.get("token") || "";
+const pageTitle = "Newsletter Subscribe Success";
+
+try {
+  const decodedToken = jwt.verify(
+    token,
+    import.meta.env.CUSTOM_JWT_SECRET
+  ) as ICreateNewsletterPayload;
+  await Astro.callAction(actions.newsletter.createSubscription.orThrow, decodedToken);
+} catch (error) {
+  console.log("[newsletter-subscribe-success]: invalid token", error);
+  return Astro.redirect('/status/newsletter-subscribe-failure');
+}
+---
+
+<BlankLayout pageTitle={pageTitle}>
+  <SimpleStatus
+    imgAlt="Subscription Success"
+    mainHeading="Succcessfully Subscribed to Newsletter!"
+  />
+</BlankLayout>

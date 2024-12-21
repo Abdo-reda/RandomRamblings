@@ -1,0 +1,8 @@
+---
+const { img, imgAlt } = Astro.props;
+---
+<div class="page-image-container">
+    <img class="dark-image" width="500" alt={imgAlt} src={`/${img}-dark.webp`} />
+    <img class="light-image" width="500" alt={imgAlt} src={`/${img}-light.webp`} />
+    <div class="waves-bg"></div>
+</div>

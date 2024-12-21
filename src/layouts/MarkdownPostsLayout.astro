@@ -1,9 +1,9 @@
 ---
-import BaseLayout from "./Layout.astro";
+import MainLayout from "./MainLayout.astro";
 const { frontmatter } = Astro.props;
 ---
 
-<BaseLayout pageTitle={frontmatter.title}>
+<MainLayout pageTitle={frontmatter.title}>
   <h2 style="text-decoration:none;">{frontmatter.title}</h2>
   <ul class="badge__list">
     <li>
@@ -17,7 +17,7 @@ const { frontmatter } = Astro.props;
     </li>
   </ul>
   <div class="page-image">
-    <img width="400" alt={frontmatter.image.alt} src={`/posts/post-${frontmatter.post}.png`} />
+    <img width="400" alt={frontmatter.image.alt} src={`/posts/post-${frontmatter.post}.webp`} />
   </div>
   <slot />
-</BaseLayout>
+</MainLayout>

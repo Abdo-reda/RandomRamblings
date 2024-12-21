@@ -1,0 +1,14 @@
+---
+const { imgSrc, imgAlt, mainHeading, subHeading } = Astro.props;
+---
+
+{imgSrc && <div class="page-image">
+  <img width="500" alt={imgAlt} src={`/${imgSrc}`} />
+</div>}
+<div>
+  <h2 style="font-size: 1.6rem;">{mainHeading}</h2>
+</div>
+<small style="margin-top: 10px;">{subHeading}</small>
+<button style="margin: 36px" onclick="location.href='/'" class="btn">
+  Back To Home
+</button>
