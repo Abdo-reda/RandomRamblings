@@ -81,7 +81,7 @@ export const NewsletterEmail = ({
         <Container style={selectedTheme.container}>
           <Img
             style={selectedTheme.image}
-            src="https://www.random-ramblings.me/main.png"
+            src="https://www.random-ramblings.me/main.webp"
             width="400"
             alt="NoPoint Logo"
           />
@@ -101,7 +101,7 @@ export const NewsletterEmail = ({
                 <div>
                   <Img
                     style={selectedTheme.postImage}
-                    src={`https://www.random-ramblings.me/posts/post-${post.post}.png`}
+                    src={`https://www.random-ramblings.me/posts/post-${post.post}.webp`}
                     width="130"
                     alt={post.image.alt}
                   ></Img>

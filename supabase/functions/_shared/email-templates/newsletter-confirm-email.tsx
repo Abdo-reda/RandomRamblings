@@ -40,7 +40,7 @@ export const NewsletterConfirmationEmail = ({ theme, token }: EmailProps) => {
         <Container style={selectedTheme.container}>
           <Img
             style={selectedTheme.image}
-            src="https://www.random-ramblings.me/main.png"
+            src="https://www.random-ramblings.me/main.webp"
             width="400"
             alt="NoPoint Logo"
           />
