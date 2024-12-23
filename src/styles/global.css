@@ -1,5 +1,4 @@
-/* Global styles */
-
+/* Maybe I need to italic later */
 @font-face {
   font-family: "Montserrat";
   src: url("/fonts/Montserrat.ttf") format("truetype");
@@ -7,8 +6,6 @@
   font-style: normal;
   font-display: swap;
 }
-
-/* Maybe I need to italic later */
 
 :root {
   --primary: #7f3737;
@@ -22,7 +19,7 @@
   --font: "Montserrat", "Roboto", sans-serif;
 }
 
-.page-image {
+.post-image {
   padding: 20px 0px;
   text-align: center;
 }
@@ -40,18 +37,14 @@
   transform: translate(-50%, -50%); 
 }
 
-.light-image {
+.light-image,
+.light .dark-image {
   display: none;
 }
 
 .light .light-image {
   display: block;
 }
-
-.light .dark-image {
-  display: none;
-}
-
 
 .waves-bg {
   will-change: background-position;
@@ -542,23 +535,10 @@ li {
   cursor: pointer;
 }
 
-/* Skills */
-.skills {
-  margin-top: 8px;
-}
-
-.skills__img {
-  margin: 8px 4px;
-}
 
 /* Items */
 .center {
   text-align: center;
-}
-
-.pro-img {
-  border-radius: 16px;
-  margin-top: 10px;
 }
 
 /* Footer */
@@ -733,19 +713,8 @@ html.light {
     margin: 0 11px;
   }
 
-  .skills__img {
-    height: 30px;
-    width: 30px;
-    margin: 8px 1px;
-  }
-
   .badge__list {
     font-size: 0.9rem;
     text-indent: 0;
-  }
-
-  .pro-img {
-    height: auto;
-    width: 350px;
   }
 }
