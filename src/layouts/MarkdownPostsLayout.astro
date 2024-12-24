@@ -17,7 +17,9 @@ const { frontmatter } = Astro.props;
     </li>
   </ul>
   <div class="post-image">
-    <img width="400" alt={frontmatter.image.alt} src={`/posts/post-${frontmatter.post}.webp`} />
+    <img alt={frontmatter.image.alt} src={`/posts/post-${frontmatter.post}.webp`} />
   </div>
-  <slot />
+  <div>
+    <slot />
+  </div>
 </MainLayout>
