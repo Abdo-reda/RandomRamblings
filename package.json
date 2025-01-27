@@ -3,9 +3,9 @@
   "author": "NoPoint",
   "description": "A Personal Blog Full of Random Ramblings.",
   "type": "module",
-  "version": "2.1.0",
+  "version": "2.1.2",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "local": "astro dev --mode local-dev --host",
     "start": "astro dev",
     "build": "astro build",

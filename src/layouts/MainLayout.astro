@@ -8,7 +8,9 @@ const { pageTitle } = Astro.props;
 <IndexLayout pageTitle={pageTitle}>
   <Header />
   <main>
-    <slot />
+    <div class="content">
+      <slot />
+    </div>
     <Footer />
   </main>
 </IndexLayout>

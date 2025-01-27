@@ -16,8 +16,10 @@ const { frontmatter } = Astro.props;
       {frontmatter.tags.map((tag) => <span class="badge badge--item tag">#{tag}</span>)}
     </li>
   </ul>
-  <div class="page-image">
-    <img width="400" alt={frontmatter.image.alt} src={`/posts/post-${frontmatter.post}.webp`} />
+  <div class="post-image">
+    <img alt={frontmatter.image.alt} src={`/posts/post-${frontmatter.post}.webp`} />
   </div>
-  <slot />
+  <div>
+    <slot />
+  </div>
 </MainLayout>
